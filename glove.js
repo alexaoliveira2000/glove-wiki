@@ -1,9 +1,10 @@
-const path = require('path');
-const axios = require('axios');
-const cheerio = require('cheerio');
-const fs = require('fs').promises;
-const { Matrix } = require('ml-matrix');
+const path = require('path');             // to check extension of links
+const axios = require('axios');           // to get html from pages
+const cheerio = require('cheerio');       // to scrape html links
+const fs = require('fs').promises;        // to read GloVe file
+const { Matrix } = require('ml-matrix');  // to calculate similarity between words
 
+// get all possible links from a given wiki page
 let getLinks = async function (page) {
     let isValidLink = function (link) {
         return link && link.startsWith("/wiki/") && !link.includes(":") && path.extname(link) === '' && link !== "Main_Page";
@@ -19,6 +20,8 @@ let getLinks = async function (page) {
     return links;
 }
 
+// read GloVe file in a given path
+// returns an object with properties { "word1" : [d1, d2, d3, ...], "word2" : [d1, d2, d3, ...], ... }
 let readGloVeFile = async function (filePath) {
     let data = await fs.readFile(filePath, 'utf8');
     const lines = data.split('\n').map(line => line.split(" "));
@@ -30,6 +33,7 @@ let readGloVeFile = async function (filePath) {
     return glove;
 }
 
+// calculate the similarity (0 to 1) between two word, given a GloVe model
 let getWordSimilarity = function (glove, word1, word2) {
     dimensionsWord1 = glove[word1];
     dimensionsWord2 = glove[word2];
@@ -50,6 +54,8 @@ let getWordSimilarity = function (glove, word1, word2) {
     return similarity;
 }
 
+// try to travel from the given source page to destination page, with a limit of pages
+// returns the path
 let play = async function (sourcePage, destinationPage) {
     let glove = await readGloVeFile("C:\\Users\\Alex\\Desktop\\glove-wiki\\glove.6B.50d.txt");
     let pagesPath = [sourcePage];
