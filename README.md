@@ -23,7 +23,7 @@ If you notice, we can quantify the similarities between words if we define **dim
 
 ![image](https://github.com/alexaoliveira2000/glove-wiki/assets/77057098/df691f27-4f47-41da-bc8f-6bbeda9ac0de)
 
-Now it's a lot easier to compare them, and you can literally quantify the similarity by the proximity of the points (distance between them). But what if we add a third dimension, for example the size of the animal? We would be drawing a third axis - Z - creating a 3D graph. This logic keeps going each time we had a new dimension (a new type of comparison between words), creating graphs with dimensions we cannot even imagine, in scales of the hundreds.
+Now it's a lot easier to compare them, and you can literally quantify the similarity by the proximity of the points (distance between them). But what if we add a third dimension, for example the size of the animal? We would be drawing a third axis - Z - creating a 3D graph. This logic keeps going each time we add a new dimension (a new type of comparison between words), creating graphs with dimensions we cannot even imagine, in scales of the hundreds.
 
 ## GloVe - Global Vectors for Word Representation
 GloVe is an artificial intelligence model that was trained to capture all these relationships between every word on the english alphabet. For every word, that word is analysed in hundreds of dimensions. The most popular models have this evaluation done for 200 and 300 dimensions, with a vocabulary that varies between 400k and 2 million words. What each dimension evaluates, is a complete mistery that only the AI itself knows - they don't represent specific characteristics that we normally think about.
